@@ -1,5 +1,5 @@
 const jwt=require ('jsonwebtoken');
-const JWT_SECRET=process.env.JWT_ADMIN_PASSWORD;
+const JWT_SECRET=process.env.JWT_USER_PASSWORD;
 
 async function userAuth(req,res,next) {
     const token=req.cookies.token;
@@ -12,7 +12,7 @@ async function userAuth(req,res,next) {
 
     try{
         const verifyed=jwt.verify(token,JWT_SECRET);
-        req.verifyed=verifyed;
+        req.userId=verifyed.id;
         next();
     }catch(err){
         res.status(401).json({

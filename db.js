@@ -15,10 +15,21 @@ const adminSchema = new Schema({
 });
 
 const courseSchema = new Schema({
-    title: String,
-    description: String, // fixed typo here
+    title: {
+        type: String,
+        required:true
+    },
+    description: String, 
     price: Number,
-    adminId: ObjectId
+    adminId: ObjectId,
+    thumbnailUrl:{
+        type: String,
+        default:"./local/default.jpg"
+    },
+    videoUrl:{
+        type:String,
+        required:true
+    }
 });
 
 const boughtSchema = new Schema({
@@ -26,7 +37,6 @@ const boughtSchema = new Schema({
     userId: ObjectId
 });
 
-// fixed 'Model' to 'model'
 const userModel = mongoose.model('user', userSchema);
 const adminModel = mongoose.model('admin', adminSchema);
 const courseModel = mongoose.model('course', courseSchema);
